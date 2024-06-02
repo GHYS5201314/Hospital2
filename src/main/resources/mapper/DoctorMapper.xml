@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qy.mapper.DoctorMapper">
+    <insert id="insert">
+        insert into doctor values(null,#{name},#{age},#{sex},#{department},#{direction},#{position})
+    </insert>
+    <update id="update">
+        update doctor set name=#{doctor.name},age=#{doctor.age},sex=#{doctor.sex},department=#{doctor.department},direction=#{doctor.direction},position=#{doctor.position} where D_id=#{id}
+    </update>
+    <select id="selectid" resultType="java.lang.Integer">
+        select doctor.D_id from doctor where name=#{name} and age=#{age} and sex=#{sex} and department=#{department} and direction=#{direction} and position=#{position}
+    </select>
+    <select id="findmsg" resultType="com.qy.domain.Doctor">
+        select * from doctor where D_id=#{id}
+    </select>
+</mapper>

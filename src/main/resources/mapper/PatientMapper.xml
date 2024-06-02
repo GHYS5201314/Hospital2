@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qy.mapper.PatientMapper">
+    <insert id="insert">
+        insert into patient values(null,#{name},#{age},#{sex},0)
+    </insert>
+    <insert id="insertbook">
+        insert into patientanddoctor values(#{P_id},#{D_id},#{C_id},'已付款')
+    </insert>
+    <update id="update">
+        update patient set name=#{name},age=#{age},sex=#{sex} where P_id=#{P_id}
+    </update>
+    <update id="updatebook">
+        update class set leftNumber=leftNumber-1 where D_id=#{D_id} and C_id=#{C_id};
+    </update>
+    <update id="updatebook2">
+        update patientanddoctor set status='已完成' where P_id=#{P_id} and D_id=#{D_id} and C_id=#{C_id};
+    </update>
+    <update id="updatebook3">
+        update patientanddoctor set status='已就诊' where P_id=#{P_id} and D_id=#{D_id} and C_id=#{C_id};
+    </update>
+    <update id="updatebook4">
+        update patientanddoctor set status='已超时' where P_id=#{P_id} and D_id=#{D_id} and C_id=#{C_id};
+    </update>
+    <update id="updatepatient4">
+        update patient set times=times+1 where P_id=#{P_id}
+    </update>
+    <select id="selectid" resultType="java.lang.Integer">
+        select patient.P_id from patient where name=#{name} and age=#{age} and sex=#{sex};
+    </select>
+    <select id="findmsg" resultType="com.qy.domain.Patient">
+        select * from patient where P_id=#{id}
+    </select>
+</mapper>

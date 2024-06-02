@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qy.mapper.SystemUserMapper">
+    <insert id="insert">
+        insert into user values(#{username},#{password},#{role},#{id})
+    </insert>
+    <select id="findbyusernameandpasswordandrole" resultType="com.qy.domain.SystemUser">
+        select * from user where username=#{username} and password=#{password} and role=#{role}
+    </select>
+</mapper>

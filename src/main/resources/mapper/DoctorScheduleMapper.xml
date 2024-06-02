@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qy.mapper.DoctorScheduleMapper">
+    <insert id="insert">
+        insert into class values(#{D_id},null,#{kind_id},#{duration},#{cost},#{number},#{number})
+    </insert>
+    <insert id="Insertclassname">
+        insert into classid values(null,#{name})
+    </insert>
+    <update id="update">
+        update class set start=#{c.start},end=#{c.end},number=#{c.number},leftNumber=#{c.number} where D_id=#{D_id} and C_id=#{c.C_id}
+    </update>
+    <delete id="delete">
+        delete from class where D_id=#{D_id} and C_id=#{C_id}
+    </delete>
+    <select id="findAll" resultType="com.qy.domain.DoctorSchedule">
+        select * from class where D_id=#{id}
+    </select>
+    <select id="findByD_idandC_id" resultType="com.qy.domain.DoctorSchedule">
+        select * from class where D_id=#{D_id} and C_id=#{C_id}
+    </select>
+    <select id="findByP_idandD_idandC_id" resultType="com.qy.domain.DoctorSchedule">
+        select class.D_id,class.C_id,class.kind_id,class.start,class.end,class.number,class.leftnumber from class,patientanddoctor where class.D_id=#{D_id} and class.C_id=#{C_id} and patientanddoctor.P_id=#{P_id} and patientanddoctor.D_id=#{D_id} and patientanddoctor.C_id=#{C_id}
+    </select>
+    <select id="findByP_id" resultType="com.qy.domain.Schedule">
+        select doctor.name as doctorname,patient.name as patientname,classid.name as classname,class.duration as duration,patientanddoctor.status as status from classid,class,patientanddoctor,doctor,patient where patientanddoctor.P_id=#{P_id} and patientanddoctor.C_id=class.C_id and class.kind_id=classid.C_id and patientanddoctor.D_id=doctor.D_id;
+    </select>
+    <select id="findByname" resultType="com.qy.domain.Classid">
+        select * from classid where name=#{name}
+    </select>
+    <select id="findAllnameandid" resultType="com.qy.domain.Classid">
+        select * from classid
+    </select>
+</mapper>
